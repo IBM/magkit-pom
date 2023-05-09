@@ -22,8 +22,6 @@
     <properties>
         <!-- Magnolia version, override this to use another version -->
         <magnoliaVersion>6.2.33</magnoliaVersion>
-        <magnolia.content-types.version>1.2</magnolia.content-types.version>
-        <magnolia.site.version>1.4</magnolia.site.version>
 
         <source.javaversion>11</source.javaversion>
         <target.javaversion>11</target.javaversion>
@@ -35,13 +33,13 @@
         <checkstyle.skip>false</checkstyle.skip>
         <checkstyle.config>src/config</checkstyle.config>
         <checkstyle.excludes>**/package-info.java</checkstyle.excludes>
-        <maven.checkstyle.plugin>3.1.2</maven.checkstyle.plugin>
-        <com.puppycrawl.tools.checkstyle>9.0</com.puppycrawl.tools.checkstyle>
+        <version.maven-checkstyle-plugin>3.1.2</version.maven-checkstyle-plugin>
+        <version.checkstyle>9.0</version.checkstyle>
 
-        <version.servlet.api>2.5</version.servlet.api>
-        <version.jsp.api>2.1</version.jsp.api>
+        <version.servlet-api>2.5</version.servlet-api>
+        <version.jsp-api>2.1</version.jsp-api>
         <version.junit>4.13.1</version.junit>
-        <version.mockito>2.28.2</version.mockito>
+        <version.mockito-core>2.28.2</version.mockito-core>
     </properties>
 
     <dependencyManagement>
@@ -66,13 +64,13 @@
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
-                <version>${version.servlet.api}</version>
+                <version>${version.servlet-api}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>javax.servlet.jsp</groupId>
                 <artifactId>jsp-api</artifactId>
-                <version>${version.jsp.api}</version>
+                <version>${version.jsp-api}</version>
                 <scope>provided</scope>
             </dependency>
 
@@ -86,7 +84,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>${version.mockito}</version>
+                <version>${version.mockito-core}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -155,7 +153,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>${maven.checkstyle.plugin}</version>
+                    <version>${version.maven-checkstyle-plugin}</version>
                     <configuration>
                         <configLocation>${checkstyle.config}/checkstyle-rules.xml</configLocation>
                         <failsOnError>true</failsOnError>
@@ -183,7 +181,7 @@
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
                             <artifactId>checkstyle</artifactId>
-                            <version>${com.puppycrawl.tools.checkstyle}</version>
+                            <version>${version.checkstyle}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
