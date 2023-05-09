@@ -12,7 +12,7 @@
         defines the common management sections with their default settings for dependencies and plugins.
     </description>
     <url>https://github.com/IBM/magkit-pom</url>
-    <inceptionYear>2013</inceptionYear>
+    <inceptionYear>2023</inceptionYear>
 
     <organization>
         <name>IBM iX</name>
@@ -34,6 +34,14 @@
         <!-- checkstyle can be disabled with this property -->
         <checkstyle.skip>false</checkstyle.skip>
         <checkstyle.config>src/config</checkstyle.config>
+        <checkstyle.excludes>**/package-info.java</checkstyle.excludes>
+        <maven.checkstyle.plugin>3.1.2</maven.checkstyle.plugin>
+        <com.puppycrawl.tools.checkstyle>9.0</com.puppycrawl.tools.checkstyle>
+
+        <version.servlet.api>2.5</version.servlet.api>
+        <version.jsp.api>2.1</version.jsp.api>
+        <version.junit>4.13.1</version.junit>
+        <version.mockito>2.28.2</version.mockito>
     </properties>
 
     <dependencyManagement>
@@ -54,37 +62,17 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <dependency>
-                <groupId>info.magnolia.core</groupId>
-                <artifactId>magnolia-virtual-uri</artifactId>
-                <version>${magnoliaVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>info.magnolia.types</groupId>
-                <artifactId>magnolia-content-types</artifactId>
-                <version>${magnolia.content-types.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>info.magnolia.site</groupId>
-                <artifactId>magnolia-site</artifactId>
-                <version>${magnolia.site.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>info.magnolia.site</groupId>
-                <artifactId>magnolia-site-app</artifactId>
-                <version>${magnolia.site.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
-                <version>2.5</version>
+                <version>${version.servlet.api}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>javax.servlet.jsp</groupId>
                 <artifactId>jsp-api</artifactId>
-                <version>2.1</version>
+                <version>${version.jsp.api}</version>
                 <scope>provided</scope>
             </dependency>
 
@@ -92,13 +80,13 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.13.1</version>
+                <version>${version.junit}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>1.9.0</version>
+                <version>${version.mockito}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -132,6 +120,7 @@
         <plugins>
             <!-- Perform a checkstyle analysis according to the configuration defined by plugin management. -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
             <plugin>
@@ -164,16 +153,22 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>3.1.2</version>
+                    <version>${maven.checkstyle.plugin}</version>
                     <configuration>
                         <configLocation>${checkstyle.config}/checkstyle-rules.xml</configLocation>
                         <failsOnError>true</failsOnError>
                         <consoleOutput>true</consoleOutput>
                         <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                        <excludes>**/package-info.java</excludes>
+                        <excludes>${checkstyle.excludes}</excludes>
                         <skip>${checkstyle.skip}</skip>
                         <linkXRef>false</linkXRef>
+                        <logViolationsToConsole>true</logViolationsToConsole>
+                        <failOnViolation>true</failOnViolation>
+                        <maxAllowedViolations>0</maxAllowedViolations>
+                        <violationSeverity>info</violationSeverity>
+                        <headerLocation />
                     </configuration>
                     <executions>
                         <execution>
@@ -188,7 +183,7 @@
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
                             <artifactId>checkstyle</artifactId>
-                            <version>9.0</version>
+                            <version>${com.puppycrawl.tools.checkstyle}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
