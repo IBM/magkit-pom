@@ -47,6 +47,11 @@
                         <groupId>commons-lang</groupId>
                         <artifactId>commons-lang</artifactId>
                     </exclusion>
+                    <!-- get rid of transitive missing vaadin-server.rc1 pom -->
+                    <exclusion>
+                        <groupId>com.vaadin.addon</groupId>
+                        <artifactId>date-range-field</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
@@ -134,8 +139,6 @@
                 <artifactId>license-maven-plugin</artifactId>
                 <version>2.0.0</version>
                 <configuration>
-                    <licenseName>gpl3_license</licenseName>
-                    <licenseResolver>${project.baseUri}/src/license</licenseResolver>
                     <excludes>
                         <exclude>/mgnl-bootstrap/**.*</exclude>
                     </excludes>
@@ -148,7 +151,7 @@
                         </goals>
                         <phase>process-sources</phase>
                         <configuration>
-                            <licenseName>gpl3_license</licenseName>
+                            <licenseName>apache_v2</licenseName>
                             <excludes>
                                 <exclude>**/checkstyle-rules.xml</exclude>
                                 <exclude>**/mgnl-bootstrap/**/*.xml</exclude>
