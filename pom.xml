@@ -21,7 +21,7 @@
 
     <properties>
         <!-- Magnolia version, override this to use another version -->
-        <magnoliaVersion>6.2.33</magnoliaVersion>
+        <version.magnolia>6.2.33</version.magnolia>
 
         <source.javaversion>11</source.javaversion>
         <target.javaversion>11</target.javaversion>
@@ -35,11 +35,6 @@
         <checkstyle.excludes>**/package-info.java</checkstyle.excludes>
         <version.maven-checkstyle-plugin>3.1.2</version.maven-checkstyle-plugin>
         <version.checkstyle>9.0</version.checkstyle>
-
-        <version.servlet-api>2.5</version.servlet-api>
-        <version.jsp-api>2.1</version.jsp-api>
-        <version.junit>4.13.1</version.junit>
-        <version.mockito-core>2.28.2</version.mockito-core>
     </properties>
 
     <dependencyManagement>
@@ -47,7 +42,7 @@
             <dependency>
                 <groupId>info.magnolia.ui</groupId>
                 <artifactId>magnolia-ui-admincentral</artifactId>
-                <version>${magnoliaVersion}</version>
+                <version>${version.magnolia}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>commons-lang</groupId>
@@ -60,39 +55,28 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-
+            <!-- Importing depMgt -->
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>${version.servlet-api}</version>
-                <scope>provided</scope>
+                <groupId>info.magnolia.bundle</groupId>
+                <artifactId>magnolia-bundle-parent</artifactId>
+                <version>${version.magnolia}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
+            <!-- Import depMgt for 3rd-party libraries (BOM) -->
             <dependency>
-                <groupId>javax.servlet.jsp</groupId>
-                <artifactId>jsp-api</artifactId>
-                <version>${version.jsp-api}</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <!-- TEST -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${version.junit}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>${version.mockito-core}</version>
-                <scope>test</scope>
+                <groupId>info.magnolia.boms</groupId>
+                <artifactId>magnolia-external-dependencies</artifactId>
+                <version>${version.magnolia}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>info.magnolia</groupId>
                 <artifactId>magnolia-core</artifactId>
                 <type>test-jar</type>
                 <classifier>tests</classifier>
-                <version>${magnoliaVersion}</version>
+                <version>${version.magnolia}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
