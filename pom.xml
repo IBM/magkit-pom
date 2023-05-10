@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ibmix.magkit</groupId>
+    <artifactId>magkit-pom</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>IBM iX Magkit-POM</name>
+    <description>IBM iX Magkit POM which should be used as the top level pom of the project structure for iX-Magkit projects. This POM
+        defines the common management sections with their default settings for dependencies and plugins.
+    </description>
+    <url>https://github.com/IBM/magkit-pom</url>
+    <inceptionYear>2023</inceptionYear>
+
+    <organization>
+        <name>IBM iX</name>
+        <url>https://ibmix.de</url>
+    </organization>
+
+    <properties>
+        <!-- Magnolia version, override this to use another version -->
+        <version.magnolia>6.2.33</version.magnolia>
+
+        <source.javaversion>11</source.javaversion>
+        <target.javaversion>11</target.javaversion>
+
+        <source.encoding>UTF-8</source.encoding>
+        <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
+
+        <!-- checkstyle can be disabled with this property -->
+        <checkstyle.skip>false</checkstyle.skip>
+        <checkstyle.config>src/config</checkstyle.config>
+        <checkstyle.excludes>**/package-info.java</checkstyle.excludes>
+        <version.maven-checkstyle-plugin>3.1.2</version.maven-checkstyle-plugin>
+        <version.checkstyle>9.0</version.checkstyle>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>info.magnolia.ui</groupId>
+                <artifactId>magnolia-ui-admincentral</artifactId>
+                <version>${version.magnolia}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-lang</groupId>
+                        <artifactId>commons-lang</artifactId>
+                    </exclusion>
+                    <!-- get rid of transitive missing vaadin-server.rc1 pom -->
+                    <exclusion>
+                        <groupId>com.vaadin.addon</groupId>
+                        <artifactId>date-range-field</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- Importing depMgt -->
+            <dependency>
+                <groupId>info.magnolia.bundle</groupId>
+                <artifactId>magnolia-bundle-parent</artifactId>
+                <version>${version.magnolia}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Import depMgt for 3rd-party libraries (BOM) -->
+            <dependency>
+                <groupId>info.magnolia.boms</groupId>
+                <artifactId>magnolia-external-dependencies</artifactId>
+                <version>${version.magnolia}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>info.magnolia</groupId>
+                <artifactId>magnolia-core</artifactId>
+                <type>test-jar</type>
+                <classifier>tests</classifier>
+                <version>${version.magnolia}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <!-- default resources configuration which will filter your module descriptors -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>META-INF/magnolia/*</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>META-INF/magnolia/*</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <!-- Perform a checkstyle analysis according to the configuration defined by plugin management. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>2.0.0</version>
+                <configuration>
+                    <excludes>
+                        <exclude>/mgnl-bootstrap/**.*</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>first</id>
+                        <goals>
+                            <goal>update-file-header</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                        <configuration>
+                            <licenseName>apache_v2</licenseName>
+                            <excludes>
+                                <exclude>**/checkstyle-rules.xml</exclude>
+                                <exclude>**/mgnl-bootstrap/**/*.xml</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${version.maven-checkstyle-plugin}</version>
+                    <configuration>
+                        <configLocation>${checkstyle.config}/checkstyle-rules.xml</configLocation>
+                        <failsOnError>true</failsOnError>
+                        <consoleOutput>true</consoleOutput>
+                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                        <excludes>${checkstyle.excludes}</excludes>
+                        <skip>${checkstyle.skip}</skip>
+                        <linkXRef>false</linkXRef>
+                        <logViolationsToConsole>true</logViolationsToConsole>
+                        <failOnViolation>true</failOnViolation>
+                        <maxAllowedViolations>0</maxAllowedViolations>
+                        <violationSeverity>info</violationSeverity>
+                        <headerLocation />
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>check-checkstyle</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.puppycrawl.tools</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <version>${version.checkstyle}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                    <configuration>
+                        <encoding>${source.encoding}</encoding>
+                        <source>${source.javaversion}</source>
+                        <target>${target.javaversion}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.2.0</version>
+                    <configuration>
+                        <encoding>${source.encoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.2.0</version>
+                    <executions>
+                        <execution>
+                            <id>create-test-jar</id>
+                            <goals>
+                                <goal>test-jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <!--
+                    This plugin is used to release a project with Maven, saving a lot of repetitive, manual work. Releasing a project is
+                    made in two steps: prepare and perform. see http://maven.apache.org/plugins/maven-release-plugin
+                -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.3</version>
+                    <configuration>
+                        <preparationGoals>clean verify</preparationGoals>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <pushChanges>false</pushChanges>
+                        <localCheckout>true</localCheckout>
+                        <goals>deploy</goals>
+                        <releaseProfiles>javadoc</releaseProfiles>
+                    </configuration>
+                </plugin>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                            org.codehaus.mojo
+                                        </groupId>
+                                        <artifactId>
+                                            license-maven-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [1.7,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>
+                                                update-file-header
+                                            </goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>javadoc</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <scm>
+        <url>https://github.com/IBM/magkit-pom</url>
+        <connection>scm:git:https://github.com/IBM/magkit-pom.git</connection>
+        <developerConnection>scm:git:https://github.com/IBM/magkit-pom.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>magnolia.forge.releases</id>
+            <url>https://nexus.magnolia-cms.com/content/repositories/magnolia.forge.releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>magnolia.forge.snapshots</id>
+            <url>https://nexus.magnolia-cms.com/content/repositories/magnolia.forge.snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>magnolia.community</id>
+            <name>Magnolia Community Repository</name>
+            <url>https://nexus.magnolia-cms.com/content/repositories/magnolia.public.releases/</url>
+        </repository>
+        <repository>
+            <id>magnolia.thirdparty</id>
+            <name>Magnolia Third Party Repository</name>
+            <url>https://nexus.magnolia-cms.com/content/repositories/thirdparty.customized/</url>
+        </repository>
+        <repository>
+            <id>vaadin-addons</id>
+            <url>http://maven.vaadin.com/vaadin-addons</url>
+        </repository>
+    </repositories>
+</project>
