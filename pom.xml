@@ -35,7 +35,7 @@
 
         <!-- checkstyle can be disabled with this property -->
         <checkstyle.skip>false</checkstyle.skip>
-        <checkstyle.config>com/de/ibmix</checkstyle.config>
+        <checkstyle.config>src/config</checkstyle.config>
         <checkstyle.excludes>**/package-info.java</checkstyle.excludes>
         <version.maven-checkstyle-plugin>3.1.2</version.maven-checkstyle-plugin>
         <version.checkstyle>9.0</version.checkstyle>
@@ -91,19 +91,6 @@
                 </includes>
             </resource>
         </resources>
-        <extensions>
-            <!-- see http://maven.apache.org/pom.html#Extensions -->
-            <extension>
-                <!--
-                    aperto-build-tools contain the checkstyle-rules-lax-javadoc.xml
-                    referenced by our checkstyle configuration
-                    see https://confluence.ibmix.de/pages/viewpage.action?pageId=2951965
-                -->
-                <groupId>com.ibmix.magkit</groupId>
-                <artifactId>ibmix-build-tools</artifactId>
-                <version>0.9</version>
-            </extension>
-        </extensions>
         <plugins>
             <!-- Perform a checkstyle analysis according to the configuration defined by plugin management. -->
             <plugin>
