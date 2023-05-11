@@ -15,7 +15,6 @@
   <version>0.9</version>
 
   <properties>
-    <version.maven-jar-plugin>3.1.2</version.maven-jar-plugin>
     <version.maven-install-plugin>3.0.0-M1</version.maven-install-plugin>
     <version.maven-deploy-plugin>3.0.0-M1</version.maven-deploy-plugin>
   </properties>
