@@ -91,6 +91,19 @@
                 </includes>
             </resource>
         </resources>
+        <extensions>
+            <!-- see http://maven.apache.org/pom.html#Extensions -->
+            <extension>
+                <!--
+                    aperto-build-tools contain the checkstyle-rules-lax-javadoc.xml
+                    referenced by our checkstyle configuration
+                    see https://confluence.ibmix.de/pages/viewpage.action?pageId=2951965
+                -->
+                <groupId>com.ibmix.magkit</groupId>
+                <artifactId>ibmix-build-tools</artifactId>
+                <version>0.9</version>
+            </extension>
+        </extensions>
         <plugins>
             <!-- Perform a checkstyle analysis according to the configuration defined by plugin management. -->
             <plugin>
