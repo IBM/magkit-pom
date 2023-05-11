@@ -19,6 +19,10 @@
         <url>https://ibmix.de</url>
     </organization>
 
+    <modules>
+        <module>build-tools</module>
+    </modules>
+
     <properties>
         <!-- Magnolia version, override this to use another version -->
         <version.magnolia>6.2.33</version.magnolia>
@@ -31,30 +35,18 @@
 
         <!-- checkstyle can be disabled with this property -->
         <checkstyle.skip>false</checkstyle.skip>
-        <checkstyle.config>src/config</checkstyle.config>
+        <checkstyle.config>com/de/ibmix</checkstyle.config>
         <checkstyle.excludes>**/package-info.java</checkstyle.excludes>
         <version.maven-checkstyle-plugin>3.1.2</version.maven-checkstyle-plugin>
         <version.checkstyle>9.0</version.checkstyle>
+
+        <version.maven-clean-plugin>3.1.0</version.maven-clean-plugin>
+        <version.maven-resources-plugin>3.1.0</version.maven-resources-plugin>
+        <version.maven-jar-plugin>3.2.0</version.maven-jar-plugin>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>info.magnolia.ui</groupId>
-                <artifactId>magnolia-ui-admincentral</artifactId>
-                <version>${version.magnolia}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-lang</groupId>
-                        <artifactId>commons-lang</artifactId>
-                    </exclusion>
-                    <!-- get rid of transitive missing vaadin-server.rc1 pom -->
-                    <exclusion>
-                        <groupId>com.vaadin.addon</groupId>
-                        <artifactId>date-range-field</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
             <!-- Importing depMgt -->
             <dependency>
                 <groupId>info.magnolia.bundle</groupId>
@@ -99,6 +91,19 @@
                 </includes>
             </resource>
         </resources>
+        <extensions>
+            <!-- see http://maven.apache.org/pom.html#Extensions -->
+            <extension>
+                <!--
+                    aperto-build-tools contain the checkstyle-rules-lax-javadoc.xml
+                    referenced by our checkstyle configuration
+                    see https://confluence.ibmix.de/pages/viewpage.action?pageId=2951965
+                -->
+                <groupId>com.ibmix.magkit</groupId>
+                <artifactId>ibmix-build-tools</artifactId>
+                <version>0.9</version>
+            </extension>
+        </extensions>
         <plugins>
             <!-- Perform a checkstyle analysis according to the configuration defined by plugin management. -->
             <plugin>
@@ -180,14 +185,14 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>${version.maven-resources-plugin}</version>
                     <configuration>
                         <encoding>${source.encoding}</encoding>
                     </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>${version.maven-jar-plugin}</version>
                     <executions>
                         <execution>
                             <id>create-test-jar</id>
@@ -210,7 +215,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>${version.maven-clean-plugin}</version>
                 </plugin>
                 <!--
                     This plugin is used to release a project with Maven, saving a lot of repetitive, manual work. Releasing a project is
