@@ -19,6 +19,10 @@
         <url>https://ibmix.de</url>
     </organization>
 
+    <modules>
+        <module>build-tools</module>
+    </modules>
+
     <properties>
         <!-- Magnolia version, override this to use another version -->
         <version.magnolia>6.2.33</version.magnolia>
@@ -39,22 +43,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>info.magnolia.ui</groupId>
-                <artifactId>magnolia-ui-admincentral</artifactId>
-                <version>${version.magnolia}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-lang</groupId>
-                        <artifactId>commons-lang</artifactId>
-                    </exclusion>
-                    <!-- get rid of transitive missing vaadin-server.rc1 pom -->
-                    <exclusion>
-                        <groupId>com.vaadin.addon</groupId>
-                        <artifactId>date-range-field</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
             <!-- Importing depMgt -->
             <dependency>
                 <groupId>info.magnolia.bundle</groupId>
