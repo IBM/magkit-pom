@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.ibmix.magkit</groupId>
+  <artifactId>ibmix-build-tools</artifactId>
+  <name>ibmix-build-tools</name>
+  <description>Build tools for providing e.g. checkstyle rules for all projects.</description>
+  <version>0.9</version>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>11</maven.compiler.release>
+  </properties>
+
+  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.0.0-M1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.0.0-M1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <!-- http://mojo.codehaus.org/build-helper-maven-plugin -->
+      <!-- deploy the checkstyle rules xml as separate artifacts for easier integration via http rul into eclipse checkstyle plugin -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <!-- http://mvnrepository.com/artifact/org.codehaus.mojo/build-helper-maven-plugin -->
+        <executions>
+          <execution>
+            <id>attach-artifacts</id>
+            <phase>package</phase>
+            <goals>
+              <goal>attach-artifact</goal>
+            </goals>
+            <configuration>
+              <artifacts>
+                <artifact>
+                  <file>${basedir}/src/main/resources/com/de/ibmix/checkstyle-rules.xml</file>
+                  <type>xml</type>
+                  <classifier>checkstyle-rules</classifier>
+                </artifact>
+              </artifacts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <scm>
+    <url>https://github.com/IBM/magkit-pom</url>
+    <connection>scm:git:https://github.com/IBM/magkit-pom.git</connection>
+    <developerConnection>scm:git:https://github.com/IBM/magkit-pom.git</developerConnection>
+  </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>ibmix.nexus.releases</id>
+      <url>https://nexus.ibmix.de/repository/maven-releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>ibmix.nexus.snapshots</id>
+      <url>https://nexus.ibmix.de/repository/maven-snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+</project>
