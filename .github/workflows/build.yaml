@@ -23,4 +23,4 @@ jobs:
           mkdir -p ~/.m2
           echo "<settings><servers><server><id>magnolia.forge.snapshots</id><username>${{secrets.MGNL_USERNAME}}</username><password>${{secrets.MGNL_PASSWORD}}</password></server></servers></settings>" > ~/.m2/settings.xml
       - name: Build and Deploy with Maven
-        run: mvn clean deploy
+        run: mvn -B clean deploy
