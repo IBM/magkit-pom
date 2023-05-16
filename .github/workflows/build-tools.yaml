@@ -1,5 +1,9 @@
 name: build-tools
 run-name: ${{ github.actor }} triggered build-tools build
+on:
+  push:
+    branches:
+      - 'not-exists'
 jobs:
   build:
     runs-on: ubuntu-latest
