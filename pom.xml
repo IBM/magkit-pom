@@ -19,10 +19,6 @@
         <url>https://ibmix.de</url>
     </organization>
 
-    <modules>
-        <module>build-tools</module>
-    </modules>
-
     <properties>
         <!-- Magnolia version, override this to use another version -->
         <version.magnolia>6.2.33</version.magnolia>

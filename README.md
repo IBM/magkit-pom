@@ -1,5 +1,4 @@
-<!-- This should be the location of the title of the repository, normally the short name -->
-# repo-template
+# Opensource Magnolia Parent Pom
 
 <!-- Build Status, is a great thing to have at the top of your repository, it shows that you take your CI/CD as first class citizens -->
 <!-- [![Build Status](https://travis-ci.org/jjasghar/ibm-cloud-cli.svg?branch=master)](https://travis-ci.org/jjasghar/ibm-cloud-cli) -->
@@ -20,12 +19,6 @@ This repository contains some example best practices for open source repositorie
 * [MAINTAINERS.md](MAINTAINERS.md)
 <!-- A Changelog allows you to track major changes and things that happen, https://github.com/github-changelog-generator/github-changelog-generator can help automate the process -->
 * [CHANGELOG.md](CHANGELOG.md)
-
-> These are optional
-
-<!-- The following are OPTIONAL, but strongly suggested to have in your repository. -->
-* [dco.yml](.github/dco.yml) - This enables DCO bot for you, please take a look https://github.com/probot/dco for more details.
-* [travis.yml](.travis.yml) - This is a example `.travis.yml`, please take a look https://docs.travis-ci.com/user/tutorial/ for more details.
 
 These may be copied into a new or existing project to make it easier for developers not on a project team to collaborate.
 
