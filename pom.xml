@@ -31,7 +31,6 @@
 
         <!-- checkstyle can be disabled with this property -->
         <checkstyle.skip>false</checkstyle.skip>
-        <checkstyle.config>src/config</checkstyle.config>
         <checkstyle.excludes>**/package-info.java</checkstyle.excludes>
         <version.maven-checkstyle-plugin>3.1.2</version.maven-checkstyle-plugin>
         <version.checkstyle>9.0</version.checkstyle>
@@ -112,7 +111,6 @@
                         <configuration>
                             <licenseName>apache_v2</licenseName>
                             <excludes>
-                                <exclude>**/checkstyle-rules.xml</exclude>
                                 <exclude>**/mgnl-bootstrap/**/*.xml</exclude>
                             </excludes>
                         </configuration>
@@ -127,7 +125,6 @@
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>${version.maven-checkstyle-plugin}</version>
                     <configuration>
-                        <configLocation>${checkstyle.config}/checkstyle-rules.xml</configLocation>
                         <failsOnError>true</failsOnError>
                         <consoleOutput>true</consoleOutput>
                         <includeTestSourceDirectory>true</includeTestSourceDirectory>
