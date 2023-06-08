@@ -1,0 +1,7 @@
+# jetbrains apps
+*.iml
+.idea/
+
+# folders
+/target
+

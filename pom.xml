@@ -35,6 +35,8 @@
         <version.maven-checkstyle-plugin>3.1.2</version.maven-checkstyle-plugin>
         <version.checkstyle>9.0</version.checkstyle>
 
+        <version.license-maven-plugin>2.0.0</version.license-maven-plugin>
+
         <version.maven-clean-plugin>3.1.0</version.maven-clean-plugin>
         <version.maven-resources-plugin>3.1.0</version.maven-resources-plugin>
         <version.maven-jar-plugin>3.2.0</version.maven-jar-plugin>
@@ -95,27 +97,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>2.0.0</version>
-                <configuration>
-                    <excludes>
-                        <exclude>/mgnl-bootstrap/**.*</exclude>
-                    </excludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>first</id>
-                        <goals>
-                            <goal>update-file-header</goal>
-                        </goals>
-                        <phase>process-sources</phase>
-                        <configuration>
-                            <licenseName>apache_v2</licenseName>
-                            <excludes>
-                                <exclude>**/mgnl-bootstrap/**/*.xml</exclude>
-                            </excludes>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
         <pluginManagement>
@@ -153,6 +134,31 @@
                             <version>${version.checkstyle}</version>
                         </dependency>
                     </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>${version.license-maven-plugin}</version>
+                    <configuration>
+                        <excludes>
+                            <exclude>/mgnl-bootstrap/**.*</exclude>
+                        </excludes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>first</id>
+                            <goals>
+                                <goal>update-file-header</goal>
+                            </goals>
+                            <phase>process-sources</phase>
+                            <configuration>
+                                <licenseName>apache_v2</licenseName>
+                                <excludes>
+                                    <exclude>**/mgnl-bootstrap/**/*.xml</exclude>
+                                </excludes>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
