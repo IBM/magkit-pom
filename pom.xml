@@ -21,7 +21,7 @@
 
     <properties>
         <!-- Magnolia version, override this to use another version -->
-        <version.magnolia>6.2.33</version.magnolia>
+        <version.magnolia>6.2.12</version.magnolia>
 
         <source.javaversion>11</source.javaversion>
         <target.javaversion>11</target.javaversion>
