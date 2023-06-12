@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ibmix.magkit</groupId>
+    <groupId>de.ibmix.magkit</groupId>
     <artifactId>magkit-pom</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -31,10 +31,11 @@
 
         <!-- checkstyle can be disabled with this property -->
         <checkstyle.skip>false</checkstyle.skip>
-        <checkstyle.config>src/config</checkstyle.config>
         <checkstyle.excludes>**/package-info.java</checkstyle.excludes>
         <version.maven-checkstyle-plugin>3.1.2</version.maven-checkstyle-plugin>
         <version.checkstyle>9.0</version.checkstyle>
+
+        <version.license-maven-plugin>2.0.0</version.license-maven-plugin>
 
         <version.maven-clean-plugin>3.1.0</version.maven-clean-plugin>
         <version.maven-resources-plugin>3.1.0</version.maven-resources-plugin>
@@ -91,17 +92,6 @@
                 </includes>
             </resource>
         </resources>
-        <extensions>
-            <!-- see http://maven.apache.org/pom.html#Extensions -->
-            <extension>
-                <!--
-                    make Checkstyle rules available to child modules using a build extension
-                -->
-                <groupId>com.ibmix.magkit</groupId>
-                <artifactId>ibmix-build-tools</artifactId>
-                <version>0.9</version>
-            </extension>
-        </extensions>
         <plugins>
             <!-- Perform a checkstyle analysis according to the configuration defined by plugin management. -->
             <plugin>
@@ -111,28 +101,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>2.0.0</version>
-                <configuration>
-                    <excludes>
-                        <exclude>/mgnl-bootstrap/**.*</exclude>
-                    </excludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>first</id>
-                        <goals>
-                            <goal>update-file-header</goal>
-                        </goals>
-                        <phase>process-sources</phase>
-                        <configuration>
-                            <licenseName>apache_v2</licenseName>
-                            <excludes>
-                                <exclude>**/checkstyle-rules.xml</exclude>
-                                <exclude>**/mgnl-bootstrap/**/*.xml</exclude>
-                            </excludes>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
         <pluginManagement>
@@ -142,7 +110,6 @@
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>${version.maven-checkstyle-plugin}</version>
                     <configuration>
-                        <configLocation>${checkstyle.config}/checkstyle-rules.xml</configLocation>
                         <failsOnError>true</failsOnError>
                         <consoleOutput>true</consoleOutput>
                         <includeTestSourceDirectory>true</includeTestSourceDirectory>
@@ -171,6 +138,31 @@
                             <version>${version.checkstyle}</version>
                         </dependency>
                     </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>${version.license-maven-plugin}</version>
+                    <configuration>
+                        <excludes>
+                            <exclude>/mgnl-bootstrap/**.*</exclude>
+                        </excludes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>first</id>
+                            <goals>
+                                <goal>update-file-header</goal>
+                            </goals>
+                            <phase>process-sources</phase>
+                            <configuration>
+                                <licenseName>apache_v2</licenseName>
+                                <excludes>
+                                    <exclude>**/mgnl-bootstrap/**/*.xml</exclude>
+                                </excludes>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -330,7 +322,7 @@
         </repository>
         <repository>
             <id>vaadin-addons</id>
-            <url>http://maven.vaadin.com/vaadin-addons</url>
+            <url>https://maven.vaadin.com/vaadin-addons</url>
         </repository>
     </repositories>
 </project>
