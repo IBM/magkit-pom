@@ -301,11 +301,11 @@
     <distributionManagement>
         <repository>
             <id>magnolia.forge.releases</id>
-            <url>https://nexus.magnolia-cms.com/content/repositories/magnolia.forge.releases</url>
+            <url>https://nexus.magnolia-cms.com/repository/magnolia.forge.releases/</url>
         </repository>
         <snapshotRepository>
             <id>magnolia.forge.snapshots</id>
-            <url>https://nexus.magnolia-cms.com/content/repositories/magnolia.forge.snapshots</url>
+            <url>https://nexus.magnolia-cms.com/repository/magnolia.forge.snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
