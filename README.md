@@ -10,13 +10,6 @@ The purpose of this project is to provide a base maven pom for using in all open
 
 This repository contains only the base pom file.
 
-* [LICENSE](LICENSE)
-* [README.md](README.md)
-* [CONTRIBUTING.md](CONTRIBUTING.md)
-* [MAINTAINERS.md](MAINTAINERS.md)
-<!-- A Changelog allows you to track major changes and things that happen, https://github.com/github-changelog-generator/github-changelog-generator can help automate the process -->
-* [CHANGELOG.md](CHANGELOG.md)
-
 ## Notes
 
 If you have any questions or issues you can create a new [issue here][issues].
