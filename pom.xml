@@ -311,14 +311,9 @@
 
     <repositories>
         <repository>
-            <id>magnolia.community</id>
-            <name>Magnolia Community Repository</name>
-            <url>https://nexus.magnolia-cms.com/content/repositories/magnolia.public.releases/</url>
-        </repository>
-        <repository>
-            <id>magnolia.thirdparty</id>
-            <name>Magnolia Third Party Repository</name>
-            <url>https://nexus.magnolia-cms.com/content/repositories/thirdparty.customized/</url>
+            <id>magnolia.enterprise</id>
+            <name>Magnolia Enterprise Group</name>
+            <url>https://nexus.magnolia-cms.com/repository/enterprise/</url>
         </repository>
         <repository>
             <id>vaadin-addons</id>
