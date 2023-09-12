@@ -22,10 +22,11 @@ jobs:
       - name: Create settings.xml
         run: |
           mkdir -p ~/.m2
-          echo "<settings><servers><server><id>magnolia.enterprise</id><username>${{secrets.MGNL_USERNAME}}</username><password>${{secrets.MGNL_PASSWORD}}</password></server><server><id>magnolia.forge.snapshots</id><username>${{secrets.MGNL_USERNAME}}</username><password>${{secrets.MGNL_PASSWORD}}</password></server></servers></settings>" > ~/.m2/settings.xml
+          echo "<settings><servers><server><id>magnolia.enterprise</id><username>${{secrets.MGNL_USERNAME}}</username><password>${{secrets.MGNL_USERNAME}}</password></server><server><id>magnolia.forge.snapshots</id><username>${{secrets.MGNL_USERNAME}}</username><password>${{secrets.MGNL_USERNAME}}</password></server></servers></settings>" > ~/.m2/settings.xml
+          cat ~/.m2/settings.xml
       - name: Build PR with Maven
         if: ${{ github.base_ref == 'main' }}
-        run: mvn -B clean package -Prule-install
+        run: mvn -B clean deploy -Prule-install -X
       - name: Build and Deploy main branch with Maven
         if: ${{ github.base_ref == null }}
         run: mvn -B clean deploy -Prule-install
