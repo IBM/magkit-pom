@@ -318,6 +318,9 @@
         </profile>
         <profile>
             <id>javadoc</id>
+            <properties>
+                <checkstyle.skip>true</checkstyle.skip>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
