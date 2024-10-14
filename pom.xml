@@ -4,7 +4,7 @@
 
     <groupId>de.ibmix.magkit</groupId>
     <artifactId>magkit-pom</artifactId>
-    <version>1.0.7-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>IBM iX Magkit-POM</name>
@@ -21,10 +21,10 @@
 
     <properties>
         <!-- Magnolia version, override this to use another version -->
-        <version.magnolia>6.2.21</version.magnolia>
+        <version.magnolia>6.3.0</version.magnolia>
 
-        <source.javaversion>11</source.javaversion>
-        <target.javaversion>11</target.javaversion>
+        <source.javaversion>17</source.javaversion>
+        <target.javaversion>17</target.javaversion>
 
         <source.encoding>UTF-8</source.encoding>
         <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
@@ -32,15 +32,15 @@
         <!-- checkstyle can be disabled with this property -->
         <checkstyle.skip>false</checkstyle.skip>
         <checkstyle.excludes>**/package-info.java</checkstyle.excludes>
-        <version.maven-checkstyle-plugin>3.1.2</version.maven-checkstyle-plugin>
-        <version.checkstyle>9.0</version.checkstyle>
-        <version.checkstyle-rules>1.0.7-SNAPSHOT</version.checkstyle-rules>
+        <version.maven-checkstyle-plugin>3.4.0</version.maven-checkstyle-plugin>
+        <version.checkstyle>9.3</version.checkstyle>
+        <version.checkstyle-rules>1.1.0-SNAPSHOT</version.checkstyle-rules>
 
         <version.license-maven-plugin>2.0.0</version.license-maven-plugin>
 
-        <version.maven-clean-plugin>3.1.0</version.maven-clean-plugin>
-        <version.maven-resources-plugin>3.1.0</version.maven-resources-plugin>
-        <version.maven-jar-plugin>3.2.0</version.maven-jar-plugin>
+        <version.maven-clean-plugin>3.4.0</version.maven-clean-plugin>
+        <version.maven-resources-plugin>3.3.1</version.maven-resources-plugin>
+        <version.maven-jar-plugin>3.3.0</version.maven-jar-plugin>
 
         <!-- sonar cloud -->
         <sonar.organization>ibm-opensource</sonar.organization>
@@ -177,7 +177,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <version>3.13.0</version>
                     <configuration>
                         <encoding>${source.encoding}</encoding>
                         <source>${source.javaversion}</source>
@@ -206,12 +206,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.3.1</version>
+                    <version>3.8.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -221,7 +221,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.1.2</version>
                 </plugin>
                 <!--
                     This plugin is used to release a project with Maven, saving a lot of repetitive, manual work. Releasing a project is
@@ -288,7 +288,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
-                        <version>3.6.0</version>
+                        <version>3.7.1</version>
                         <executions>
                             <execution>
                                 <id>copy</id>
@@ -348,7 +348,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>3.2.0</version>
+                        <version>3.5.0</version>
                         <!-- http://mvnrepository.com/artifact/org.codehaus.mojo/build-helper-maven-plugin -->
                         <executions>
                             <execution>
