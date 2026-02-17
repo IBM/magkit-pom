@@ -36,11 +36,18 @@
         <version.checkstyle>9.3</version.checkstyle>
         <version.checkstyle-rules>1.1.1-SNAPSHOT</version.checkstyle-rules>
 
-        <version.license-maven-plugin>2.0.0</version.license-maven-plugin>
+        <version.license-maven-plugin>2.7.1</version.license-maven-plugin>
 
-        <version.maven-clean-plugin>3.4.0</version.maven-clean-plugin>
-        <version.maven-resources-plugin>3.3.1</version.maven-resources-plugin>
-        <version.maven-jar-plugin>3.3.0</version.maven-jar-plugin>
+        <version.maven-clean-plugin>3.5.0</version.maven-clean-plugin>
+        <version.maven-resources-plugin>3.4.0</version.maven-resources-plugin>
+        <version.maven-jar-plugin>3.5.0</version.maven-jar-plugin>
+        <version.maven-compiler-plugin>3.15.0</version.maven-compiler-plugin>
+        <version.maven-javadoc-plugin>3.12.0</version.maven-javadoc-plugin>
+        <version.maven-source-plugin>3.4.0</version.maven-source-plugin>
+        <version.maven-deploy-plugin>3.1.4</version.maven-deploy-plugin>
+        <version.maven-release-plugin>3.3.1</version.maven-release-plugin>
+        <version.maven-dependency-plugin>3.10.0</version.maven-dependency-plugin>
+        <version.build-helper-maven-plugin>3.6.1</version.build-helper-maven-plugin>
 
         <!-- sonar cloud -->
         <sonar.organization>ibm-opensource</sonar.organization>
@@ -177,7 +184,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.13.0</version>
+                    <version>${version.maven-compiler-plugin}</version>
                     <configuration>
                         <encoding>${source.encoding}</encoding>
                         <source>${source.javaversion}</source>
@@ -206,12 +213,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.8.0</version>
+                    <version>${version.maven-javadoc-plugin}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.3.1</version>
+                    <version>${version.maven-source-plugin}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -221,7 +228,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.1.4</version>
+                    <version>${version.maven-deploy-plugin}</version>
                 </plugin>
                 <!--
                     This plugin is used to release a project with Maven, saving a lot of repetitive, manual work. Releasing a project is
@@ -230,7 +237,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5.3</version>
+                    <version>${version.maven-release-plugin}</version>
                     <configuration>
                         <preparationGoals>clean verify</preparationGoals>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
@@ -238,39 +245,6 @@
                         <localCheckout>true</localCheckout>
                         <goals>deploy</goals>
                         <releaseProfiles>javadoc</releaseProfiles>
-                    </configuration>
-                </plugin>
-                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>
-                                            org.codehaus.mojo
-                                        </groupId>
-                                        <artifactId>
-                                            license-maven-plugin
-                                        </artifactId>
-                                        <versionRange>
-                                            [1.7,)
-                                        </versionRange>
-                                        <goals>
-                                            <goal>
-                                                update-file-header
-                                            </goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
                     </configuration>
                 </plugin>
             </plugins>
@@ -288,7 +262,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
-                        <version>3.7.1</version>
+                        <version>${version.maven-dependency-plugin}</version>
                         <executions>
                             <execution>
                                 <id>copy</id>
@@ -348,7 +322,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>3.5.0</version>
+                        <version>${version.build-helper-maven-plugin}</version>
                         <!-- http://mvnrepository.com/artifact/org.codehaus.mojo/build-helper-maven-plugin -->
                         <executions>
                             <execution>
