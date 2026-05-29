@@ -46,7 +46,7 @@
         <version.maven-source-plugin>3.4.0</version.maven-source-plugin>
         <version.maven-deploy-plugin>3.1.4</version.maven-deploy-plugin>
         <version.maven-release-plugin>3.3.1</version.maven-release-plugin>
-        <version.maven-dependency-plugin>3.10.0</version.maven-dependency-plugin>
+        <version.maven-dependency-plugin>3.11.0</version.maven-dependency-plugin>
         <version.build-helper-maven-plugin>3.6.1</version.build-helper-maven-plugin>
 
         <!-- sonar cloud -->
