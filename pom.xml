@@ -36,7 +36,7 @@
         <version.checkstyle>9.3</version.checkstyle>
         <version.checkstyle-rules>1.2.1-SNAPSHOT</version.checkstyle-rules>
 
-        <version.license-maven-plugin>2.7.1</version.license-maven-plugin>
+        <version.license-maven-plugin>2.9.0</version.license-maven-plugin>
 
         <version.maven-clean-plugin>3.5.0</version.maven-clean-plugin>
         <version.maven-resources-plugin>3.5.0</version.maven-resources-plugin>
